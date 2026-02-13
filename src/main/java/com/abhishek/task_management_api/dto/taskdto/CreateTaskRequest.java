@@ -1,0 +1,13 @@
+package com.abhishek.task_management_api.dto.taskdto;
+
+import lombok.Data;
+
+@Data
+public class CreateTaskRequest {
+
+    private String title;
+    private String description;
+    private String status;
+    private Long userId;
+
+}
