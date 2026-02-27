@@ -1,5 +1,6 @@
 package com.abhishek.task_management_api.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,6 +44,7 @@ public class Task {
     private User user;
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Comment> commentList;
 
     @ManyToMany

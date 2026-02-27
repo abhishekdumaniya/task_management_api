@@ -1,5 +1,6 @@
 package com.abhishek.task_management_api.service;
 
+import com.abhishek.task_management_api.domain.entities.Task;
 import com.abhishek.task_management_api.dto.userdto.CreateUserRequest;
 import com.abhishek.task_management_api.dto.userdto.CreateUserResponse;
 import com.abhishek.task_management_api.dto.userdto.GetAllUsersResponse;
@@ -15,4 +16,6 @@ public interface UserService {
     ResponseEntity<List<GetAllUsersResponse>> getAllUsers();
 
     ResponseEntity<String> deleteUser(Long id);
+
+    ResponseEntity<List<Task>> getAllTaskForSpecificUser(Long id);
 }

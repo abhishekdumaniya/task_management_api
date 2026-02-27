@@ -1,11 +1,13 @@
 package com.abhishek.task_management_api.service.impl;
 
+import com.abhishek.task_management_api.domain.entities.Task;
 import com.abhishek.task_management_api.domain.entities.User;
 import com.abhishek.task_management_api.domain.enums.Status;
 import com.abhishek.task_management_api.dto.userdto.CreateUserRequest;
 import com.abhishek.task_management_api.dto.userdto.CreateUserResponse;
 import com.abhishek.task_management_api.dto.userdto.GetAllUsersResponse;
 import com.abhishek.task_management_api.mapper.usermapper.UserMapper;
+import com.abhishek.task_management_api.repository.TaskRepository;
 import com.abhishek.task_management_api.repository.UserRepository;
 import com.abhishek.task_management_api.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
     private final UserMapper mapper;
+    private final TaskRepository taskRepository;
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
@@ -61,5 +64,11 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<String> deleteUser(Long id) {
         repository.deleteUserById(id, Status.DELETE);
         return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<Task>> getAllTaskForSpecificUser(Long id) {
+        List<Task> tasks = taskRepository.findByUserUserId(id);
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 }
